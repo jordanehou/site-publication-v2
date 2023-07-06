@@ -1,0 +1,62 @@
+{% extends 'bases.html' %}
+{%load static%}
+
+{% block content %}
+
+    
+
+
+
+
+
+
+    <div class="container">
+        <link rel="stylesheet" href="{% static 'css1.css' %}"> 
+        <div class="row" >
+            {%for subject in subjects %}
+                <div class="col-md-3 " style="margin-top: 30px; margin-bottom: 50px;">
+                    
+                    {%if subject.image%}
+                        <div class="card cardre" style="border: 1px solid black;">
+                            <a href="{% url 'courses:courselist' slug=subject.slug%}">
+                                <img class="card-img-top subImg" src="{{subject.image.url}}" alt="Lights" style="width:100%; height: 250px;">
+                                <a href="{% url 'courses:courselist' slug=subject.slug%}">
+                                    <div class="title" style="width: 100%; color: #000000; background: #212529; text-transform: uppercase; padding: 5px; text-align: center;">
+                                        <h5 class="subTitle" style="color: #000000;">
+                                            <a href="{% url 'courses:courselist' slug=subject.slug%}" style="text-decoration: none; color: white;">{{subject.name}}</a>
+                                        </h5>
+                                    </div>
+                                </a>
+    
+                                <div class="card-body">
+                                    <h5 class="subTitle" style="color: #000000;"><a href="{% url 'courses:courselist' slug=subject.slug%}" style="text-decoration: none; color: #212529;">{{subject.title}}</a></h5>
+                                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                </div>
+                            </a>
+                          </div>
+                        
+                    {%endif%}
+                    
+                            
+                    
+                </div>
+            {%endfor%}
+    
+    
+    
+          
+        </div>
+    
+        
+    
+    
+        
+    </div>
+    
+
+
+
+
+
+{% endblock %}

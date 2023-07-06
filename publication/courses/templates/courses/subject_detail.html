@@ -1,0 +1,82 @@
+{% extends 'bases.html' %}
+{%load static%}
+
+{%block content %} 
+
+
+    <div class="container">
+        <link rel="stylesheet" href="{% static 'css1.css' %}"> 
+        <div class="row" >
+            {%for mod in subject.course.module.all%}
+                <a href="{%url 'courses:moduledetail' slug=mod.slug course=mod.course subject=mod.subject%}" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+                <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Module {{mod.}} {{mod.title}}</span>
+                </a>
+            {%endfor%}
+            {%for course in subject.course.all%}
+                <div class="col-md-3 " style="margin-top: 30px; margin-bottom: 50px;">
+                    
+                    
+                        <div class="card cardre" style="border: 1px solid black;">
+                            <a href="{% url 'courses:modulelist' slug=course.slug subject=subject.slug %}">
+                                {%if course.image%}
+                                    <img class="card-img-top subImg" src="{{course.image.url}}" alt="Lights" style="width:100%; height: 250px;">
+                                {%endif%}
+
+                                <div class="title" style="width: 100%; color: #000000; background: #212529; text-transform: uppercase; padding: 5px; text-align: center;">
+                                    <h5 class="subTitle" style="color: #000000;">
+                                        <a href="{% url 'courses:modulelist' slug=course.slug subject=subject.slug %}" style="text-decoration: none; color: white;">{{course.name}}</a>
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <a href="" style="text-decoration: none;">
+                                        <h5 class="card-title" style="color: #212529;">{{course.name}}</h5>
+                                    </a>
+
+                                    <form action="{% url 'cart:cart_add' course.id %}" method="post">
+                                        {{ cart_product_formfff }}
+                                        {% csrf_token %}
+                                        <input type="submit" value="Add to cart">
+                                    </form>
+                                    {{ course.description|linebreaks }}
+                            
+                                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                </div>
+                            </a>
+                          </div>
+                        
+                          
+                </div>
+            {%empty%}
+                <div class="col-md-12" style="margin-bottom: 150px;">
+                    <h1>No course in this subject</h1><br>
+                    
+                    <p>please we are updating  this subject for the moment </p> 
+
+                    <p> are so sorry for that </p> 
+
+                    <p>You can select another subject by clicking on the link below </p>
+
+                    <a href="{% url 'courses:subjectlist' %}">Subject</a>
+               
+                </div>
+            
+                
+
+            {%endfor%}
+    
+    
+    
+          
+        </div>
+    
+        
+    
+    
+        
+    </div>
+
+
+
+
+{% endblock%}

@@ -1,0 +1,26 @@
+{%extends 'bases.html'%}
+{% block content %}
+<div class="container py-5" >
+    <div style="margin: 0 auto; width: 600px;">
+    
+        {% if registered %}
+            <h2>Vous etes deja enregistrez</h2>
+        {% endif %}
+        <h2>Register</h2> <br>   
+        <form method="POST" action="" >
+            {%csrf_token %}
+            {{ form1.as_p }}
+            {{ form2.as_p }}
+            
+            <button type="submit" class="btn btn-primary mb-2">
+                Register
+            </button>
+        </form>
+    
+    
+    </div>
+
+
+</div>
+    
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'bases.html' %}
+{% load static %}
+
+{%block content%}
+    <h1>Your shopping cart</h1>
+    <table class="cart">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Course</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Remove</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart %}
+                {% with course=item.course %}
+                    <tr>
+                        <td>
+                            <a href="{{ course.get_absolute_url }}">
+                                <img src="{% if course.image %}{{ course.image.url}}
+                                        {% else %}{% static 'img/no_image.jpg' %}{% endif %}">
+                            </a>
+                        </td>
+                        <td>{{ course.name }}</td>
+                        <td>{{ item.price }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>
+                            <form action="{% url 'cart:cart_remove' course.id %}" method="post">
+                                <input type="submit" value="Remove">
+                                {% csrf_token %}
+                            </form>
+                        </td>
+                        <td class="num">${{ item.price }}</td>
+                        <td class="num">${{ item.total_price }}</td>
+                    </tr>
+                    
+                {% endwith %}
+            {% endfor %}
+            <tr class="total">
+                <td>Total</td>
+                <td colspan="4"></td>
+                <td class="num">${{ cart.get_total_price }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <p class="text-right">
+        <a href="/" class="button
+        light">Continue shopping</a>
+        <a href="{% url 'orders:order_create' %}" class="button">Checkout</a>
+    </p>
+
+
+{%endblock%}

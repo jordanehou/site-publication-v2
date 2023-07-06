@@ -1,0 +1,23 @@
+{%extends 'bases.html'%}
+
+{% block content %}
+    <div class="container py-5" >
+        <div style="margin: 0 auto; width: 275px; border: 2px solid black; border-radius: 5px;">
+            <div >
+                <form action="" method="POST" style="margin: 20px; margin-bottom: 20px;">
+                    {%csrf_token %}
+                    <label for="username" style="margin-bottom: 10px;">User name</label>
+                    <input class="form-control" type="text" id="username" name="username" style="margin-bottom: 10px;">
+                    <label for="password" style="margin-bottom: 10px;">Password</label>
+                    <input class="form-control" type="password" id="password" name="password" style="margin-bottom: 15px;">
+                    <button type="submit" class="btn btn-primary mb-2" style="margin-bottom: 20px; width: 100%;">
+                        Log-in
+                    </button>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+    
+    
+{% endblock %}
